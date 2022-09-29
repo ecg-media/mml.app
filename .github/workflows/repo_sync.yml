@@ -31,7 +31,7 @@ jobs:
     - uses: actions-ecosystem/action-push-tag@v1
       if: ${{ (!endsWith( steps.get-latest-tag.outputs.tag, '-ecg' ) &&  steps.get-latest-tag-semver.outputs.tag != '0.0.0') || endsWith( steps.get-latest-tag.outputs.tag, '-beta' ) }}
       with:
-        tag: ${{ steps.get-latest-tag.outputs.outputs.tag }}-ecg
+        tag: ${{ steps.get-latest-tag.outputs.tag }}-ecg
     
     - name: create release
       uses: ncipollo/release-action@v1
