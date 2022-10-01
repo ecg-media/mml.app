@@ -64,7 +64,6 @@ jobs:
           echo "storeFile=upload-ecgm.jks" >> ./android/key.properties
       - name: Build artifacts
         run: |
-          cat "./android/app/build.gradle"
           flutter build appbundle --release
       - name: Cleanup
         run: |
@@ -91,5 +90,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: build/app/outputs/bundle/release/ecgm-${{ github.ref_name }}.aab
+          files: ecgm-${{ github.ref_name }}.aab
       # todo upload to play store automatically
