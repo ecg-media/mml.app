@@ -29,13 +29,13 @@ jobs:
         semver_only: true
         initial_version: '0.0.0'
     - uses: actions-ecosystem/action-push-tag@v1
-      if: ${{ (!endsWith( steps.get-latest-tag.outputs.tag, '-ecg' ) &&  steps.get-latest-tag-semver.outputs.tag != '0.0.0') || endsWith( steps.get-latest-tag.outputs.tag, '-beta' ) }}
+      if: ${{ (!endsWith( steps.get-latest-tag.outputs.tag, '-ecg' ) &&  steps.get-latest-tag-semver.outputs.tag != '0.0.0') }}
       with:
         tag: ${{ steps.get-latest-tag.outputs.tag }}-ecg
     
     - name: create release
       uses: ncipollo/release-action@v1
-      if: ${{ (!endsWith( steps.get-latest-tag.outputs.tag, '-ecg' ) &&  steps.get-latest-tag-semver.outputs.tag != '0.0.0') || endsWith( steps.get-latest-tag.outputs.tag, '-beta' ) }}
+      if: ${{ (!endsWith( steps.get-latest-tag.outputs.tag, '-ecg' ) &&  steps.get-latest-tag-semver.outputs.tag != '0.0.0') }}
       with:
         tag: ${{ steps.get-latest-tag.outputs.tag }}-ecg
         token: ${{ secrets.SYNC_PAT }}
