@@ -22,10 +22,10 @@ jobs:
         github_token: ${{ secrets.SYNC_PAT }}
         sync_tags: "true"
     - uses: oprypin/find-latest-tag@v1
+      id: latest-tag
       with:
          repository: ecg-media/mml.app
-         id: latest-tag
-
+         
     - run: echo "Octokit is at version ${{ steps.latest-tag.outputs.tag }}"
     - uses: actions-ecosystem/action-push-tag@v1
       if: ${{ !endsWith( steps.latest-tag.outputs.tag, '-ecg' ) }}
