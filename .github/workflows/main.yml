@@ -21,6 +21,8 @@ jobs:
           ver_dump=$(echo "${version/-ecg/""}")
           chmod +x customize
           ./customize
+          sed -i -E "s/    compileSdkVersion flutter.compileSdkVersion//" "./mml.app/android/app/build.gradle"
+          sed -i -E "s/    ndkVersion flutter.ndkVersion//" "./mml.app/android/app/build.gradle"
           sed -i -E "s/       versionName flutterVersionName/       versionName \"$ver_dump\"/" "./mml.app/android/app/build.gradle"
           sed -i -E "s/        versionCode flutterVersionCode.toInteger()/        versionCode \"${{github.run_number}}\".toInteger()/" "./mml.app/android/app/build.gradle"
       - name: Artefact customized version
