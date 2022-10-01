@@ -31,7 +31,7 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git tag -a "${tag}" -m ""
           git push origin "${tag}"
-      if: "!endsWith( ${{ steps.latest-tag.outputs.tag }}, '-ecg' )"
+      if: ${{ !endsWith(steps.latest-tag.outputs.tag,'-ecg') }}
     
     - name: create release
       uses: ncipollo/release-action@v1
