@@ -35,7 +35,7 @@ jobs:
     
     - name: create release
       uses: ncipollo/release-action@v1
-      if: ${{ !endsWith( "${{ steps.latest-tag.outputs.tag }}", '-ecg' ) }}
+      if: ${{ !endsWith(steps.latest-tag.outputs.tag,'-ecg') }}
       with:
         tag: ${{ steps.latest-tag.outputs.tag }}-ecg
         token: ${{ secrets.SYNC_PAT }}
