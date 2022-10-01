@@ -64,7 +64,7 @@ jobs:
           echo "storeFile=upload-ecgm.jks" >> ./android/key.properties
       - name: Build artifacts
         run: |
-          flutter build appbundle --release
+          flutter build appbundle --release --scan
       - name: Cleanup
         run: |
           rm ./android/app/upload-ecgm.jks
