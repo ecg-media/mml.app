@@ -17,8 +17,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Customizing
         run: |
-          $version = "${{ github.ref_name }}"
-          $ver_dump = $version.replace('-ecg', '')
+          version="${{ github.ref_name }}"
+          ver_dump=$(echo "${version/-ecg/""}")
           chmod +x customize
           ./customize
           sed -i -E "s/       versionName flutterVersionName/       versionName \"$ver_dump\"/./mml.app/android/app/build.gradle"
