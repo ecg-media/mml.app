@@ -24,6 +24,8 @@ jobs:
       id: latest-tag
       with:
          repository: ecg-media/mml.app
+    - name: x
+      run: echo ${{ steps.latest-tag.outputs.tag }}
     - name: Tag
       run: |
           tag=${{ steps.latest-tag.outputs.tag }}-ecg
