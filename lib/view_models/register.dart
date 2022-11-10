@@ -75,11 +75,12 @@ class RegisterViewModel extends ChangeNotifier {
       }
 
       if (Platform.isAndroid) {
-        deviceIdentifier = (await DeviceInfoPlugin().androidInfo).model ?? '';
+        deviceIdentifier = (await DeviceInfoPlugin().androidInfo).model;
       }
 
       if (Platform.isIOS) {
-        deviceIdentifier = (await DeviceInfoPlugin().iosInfo).name ?? '';
+        deviceIdentifier =
+            (await DeviceInfoPlugin().iosInfo).utsname.machine ?? '';
       }
 
       state = RegistrationState.rsa;

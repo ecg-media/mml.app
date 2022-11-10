@@ -10,7 +10,7 @@ Album _$AlbumFromJson(Map<String, dynamic> json) => Album(
       albumId: json['albumId'] as String?,
       albumName: json['albumName'] as String?,
       isDeletable: json['isDeletable'] as bool? ?? false,
-    );
+    )..isSelectable = json['isSelectable'] as bool?;
 
 Map<String, dynamic> _$AlbumToJson(Album instance) {
   final val = <String, dynamic>{};
@@ -22,6 +22,7 @@ Map<String, dynamic> _$AlbumToJson(Album instance) {
   }
 
   writeNotNull('isDeletable', instance.isDeletable);
+  writeNotNull('isSelectable', instance.isSelectable);
   writeNotNull('albumId', instance.albumId);
   writeNotNull('albumName', instance.albumName);
   return val;
