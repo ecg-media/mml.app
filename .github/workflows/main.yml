@@ -162,6 +162,7 @@ jobs:
           echo '</dict>' >> ios/ExportOptions.plist
           echo '</dict>' >> ios/ExportOptions.plist
           echo '</plist>' >> ios/ExportOptions.plist
+          cat ios/ExportOptions.plist
           xcodebuild -exportArchive -archivePath build-output/ecgm-${{ github.ref_name }}.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/ExportOptions.plist
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
