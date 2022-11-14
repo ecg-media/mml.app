@@ -152,7 +152,7 @@ jobs:
           echo '<key>method</key>' >> ios/ExportOptions.plist
           echo '<string>app-store</string>' >> ios/ExportOptions.plist
           echo '<key>teamID</key>' >> ios/ExportOptions.plist
-          echo "<string>$TEAM_ID</string>"" >> ios/ExportOptions.plist
+          echo "<string>$TEAM_ID</string>" >> ios/ExportOptions.plist
           echo '<key>signingStyle</key>' >> ios/ExportOptions.plist
           echo '<string>manual</string>' >> ios/ExportOptions.plist
           echo '<key>provisioningProfiles</key>' >> ios/ExportOptions.plist
