@@ -190,4 +190,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ecgm-${{ github.ref_name }}.ipa
+          files: mml_app.ipa
