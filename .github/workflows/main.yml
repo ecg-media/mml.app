@@ -164,6 +164,7 @@ jobs:
           echo '</plist>' >> ios/ExportOptions.plist
           cat ios/ExportOptions.plist
           xcodebuild -exportArchive -archivePath build-output/ecgm-${{ github.ref_name }}.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/ExportOptions.plist
+          mv build-output/ios/mml_app.ipa build-output/ios/ecgm-${{ github.ref_name }}.ipa
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -190,4 +191,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: mml_app.ipa
+          files: ecgm-${{ github.ref_name }}.ipa
