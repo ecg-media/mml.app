@@ -23,7 +23,7 @@
   "reRegister": "Ihre Registrierung ist nicht mehr gültig. Registrieren Sie Ihr Gerät erneut!",
   "records": "Aufnahmen",
   "settings": "Einstellungen",
-  "playlist": "Wiedergabeliste",
+  "playlist": "Gespeicherte Titel",
   "next": "Weiter",
   "firstName": "Vorname",
   "lastName": "Nachname",
@@ -70,5 +70,6 @@
   "fileNotFound":"Datei konnte nicht gefunden werden. Fügen Sie die Aufnahme erneut zu einer Playlist hinzu.",
   "downloadError":"Download fehlgeschlagen. Überprüfen Sie ihre Verbindung und Speicherplatz und versuchen Sie es erneut.",
   "back":"zurück",
-  "folder":"Ordner"
+  "folder":"Ordner",
+  "language": "Sprache"
 }

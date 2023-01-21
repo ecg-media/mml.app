@@ -16,7 +16,7 @@
   "reRegister": "Your registration is not valid any more. Re-Register your device!",
   "records": "Records",
   "settings": "Settings",
-  "playlist": "Playlist",
+  "playlist": "Saved tracks",
   "next": "Next",
   "firstName": "First name",
   "lastName": "Last name",
@@ -63,5 +63,6 @@
   "fileNotFound":"File could not be found. Add the recording to a playlist again.",
   "downloadError":"Download failed. Check your connection and storage space and try again.",
   "back":"back",
-  "folder":"Folder"
+  "folder":"Folder",
+  "language": "Language"
 }
