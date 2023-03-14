@@ -9,7 +9,7 @@ if [ -d "$DIR" ]; then
   git pull
   cd ..
 else
-  git clone --branch debug https://github.com/we-kode/mml.app.git $DIR
+  git clone --branch master https://github.com/we-kode/mml.app.git $DIR
 fi
 # replace icons
 echo "Replacing icons"
