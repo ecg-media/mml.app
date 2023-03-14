@@ -15,11 +15,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # Runs a set of commands using the runners shell
-      - name: master
+      - name: Customizing
         run: |
           version="${{ github.ref_name }}"
           ver_dump=$(echo "${version/-ecg/''}")
-          chmod +x customize
+          chmod +x master
           ./customize
           sed -i -E "s/       versionName flutterVersionName/       versionName \"$ver_dump\"/" "./mml.app/android/app/build.gradle"
           sed -i -E "s/        versionCode flutterVersionCode.toInteger\(\)/        versionCode \"${{github.run_number}}\".toInteger\(\)/" "./mml.app/android/app/build.gradle"
