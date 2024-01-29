@@ -94,7 +94,7 @@ jobs:
           files: ecgm-${{ github.ref_name }}.aab
 
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-13
     needs: [prepare]
     steps:
       - uses: actions/checkout@v3
@@ -118,8 +118,8 @@ jobs:
           PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           # import certificate and provisioning profile from secrets
-          echo -n "$P12_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-          echo -n "$PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
+          echo -n "$P12_BASE64" | base64 --decode > $CERTIFICATE_PATH
+          echo -n "$PROVISION_PROFILE_BASE64" | base64 --decode > $PP_PATH
           # create temporary keychain
           security create-keychain -p "$P12_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
