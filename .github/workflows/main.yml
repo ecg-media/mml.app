@@ -163,6 +163,10 @@ jobs:
           echo '</dict>' >> ios/ExportOptions.plist
           echo '</plist>' >> ios/ExportOptions.plist
           cat ios/ExportOptions.plist
+          echo "tid: ${{ secrets.APPLE_TEAM_ID }}" >> what.txt
+          echo "pp: ${{ secrets.PROVISION_PROFILE_UID }}" >> what.txt
+          cat what.txt
+          rm what.txt
           xcodebuild -exportArchive -archivePath build-output/ecgm-${{ github.ref_name }}.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/ExportOptions.plist
           mv build-output/ios/mml_app.ipa build-output/ios/ecgm-${{ github.ref_name }}.ipa
       - name: Upload artifacts
