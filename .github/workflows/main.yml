@@ -144,6 +144,9 @@ jobs:
         run: |
           xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release DEVELOPMENT_TEAM=$TEAM_ID -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/ecgm-${{ github.ref_name }}.xcarchive PROVISIONING_PROFILE=$PROVISION_PROFILE_UID clean archive CODE_SIGN_IDENTITY="$CODE_SIGN_IDENTITY"
       - name: Export ipa
+        env:
+          PROVISION_PROFILE_UID: ${{ secrets.PROVISION_PROFILE_UID }}
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
           echo '<?xml version="1.0" encoding="UTF-8"?>' >> ios/ExportOptions.plist
           echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ios/ExportOptions.plist
@@ -152,19 +155,19 @@ jobs:
           echo '<key>method</key>' >> ios/ExportOptions.plist
           echo '<string>app-store</string>' >> ios/ExportOptions.plist
           echo '<key>teamID</key>' >> ios/ExportOptions.plist
-          echo "<string>${{ secrets.APPLE_TEAM_ID }}</string>" >> ios/ExportOptions.plist
+          echo "<string>$TEAM_ID</string>" >> ios/ExportOptions.plist
           echo '<key>signingStyle</key>' >> ios/ExportOptions.plist
           echo '<string>manual</string>' >> ios/ExportOptions.plist
           echo '<key>provisioningProfiles</key>' >> ios/ExportOptions.plist
           echo '<dict>' >> ios/ExportOptions.plist
           echo "<key>de.ecg.medialib</key>" >> ios/ExportOptions.plist
-          echo "<string>${{ secrets.PROVISION_PROFILE_UID }}</string>" >> ios/ExportOptions.plist
+          echo "<string>$PROVISION_PROFILE_UID</string>" >> ios/ExportOptions.plist
           echo '</dict>' >> ios/ExportOptions.plist
           echo '</dict>' >> ios/ExportOptions.plist
           echo '</plist>' >> ios/ExportOptions.plist
           cat ios/ExportOptions.plist
-          echo "tid: ${{ secrets.APPLE_TEAM_ID }}" >> what.txt
-          echo "pp: ${{ secrets.PROVISION_PROFILE_UID }}" >> what.txt
+          echo "tid: $TEAM_ID" >> what.txt
+          echo "pp: $PROVISION_PROFILE_UID" >> what.txt
           cat what.txt
           rm what.txt
           xcodebuild -exportArchive -archivePath build-output/ecgm-${{ github.ref_name }}.xcarchive -exportPath build-output/ios -exportOptionsPlist ios/ExportOptions.plist
