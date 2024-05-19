@@ -65,6 +65,7 @@ jobs:
           echo "storeFile=upload-ecgm.jks" >> ./android/key.properties
       - name: Build artifacts
         run: |
+          flutter gen-l10n
           flutter build appbundle --release
       - name: Cleanup
         run: |
@@ -137,7 +138,9 @@ jobs:
           flutter pub run build_runner build --delete-conflicting-outputs
           flutter gen-l10n
       - name: Build Flutter
-        run: flutter build ios --release --no-codesign
+        run: | 
+          flutter gen-l10n
+          flutter build ios --release --no-codesign
       - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release
       - name: Build xArchive
