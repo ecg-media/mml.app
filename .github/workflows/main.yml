@@ -94,7 +94,7 @@ jobs:
           files: ecgm-${{ github.ref_name }}.aab
 
   build-ios:
-    runs-on: macos-13
+    runs-on: macos-15
     needs: [prepare]
     steps:
       - uses: actions/checkout@v3
