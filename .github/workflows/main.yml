@@ -45,11 +45,6 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: 3.24.5
-      - name: Reinstall Android SDK 36
-        run: |
-          rm -rf $ANDROID_SDK_ROOT/platforms/android-36
-          sdkmanager "platforms;android-36" "build-tools:34.0.0"
       - name: Install project dependencies
         run: flutter pub get
       - name: Generate intermediates
@@ -109,7 +104,6 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: 3.24.5
       - name: Install the Apple certificate and provisioning profile
         env:
           P12_BASE64: ${{ secrets.P12_BASE64 }}
