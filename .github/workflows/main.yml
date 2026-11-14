@@ -45,6 +45,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.47.9'
       - name: Install project dependencies
         run: flutter pub get
       - name: Generate intermediates
@@ -94,7 +95,7 @@ jobs:
           files: ecgm-${{ github.ref_name }}.aab
 
   build-ios:
-    runs-on: macos-15
+    runs-on: macos-latest
     needs: [prepare]
     steps:
       - uses: actions/checkout@v7
@@ -104,6 +105,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.47.9'
       - name: Install the Apple certificate and provisioning profile
         env:
           P12_BASE64: ${{ secrets.P12_BASE64 }}
