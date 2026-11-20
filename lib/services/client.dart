@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:fast_rsa/fast_rsa.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mml_app/models/client_registration.dart';
 import 'package:mml_app/services/api.dart';
@@ -11,6 +10,7 @@ import 'package:mml_app/services/file.dart';
 import 'package:mml_app/services/messenger.dart';
 import 'package:mml_app/services/router.dart';
 import 'package:mml_app/services/secure_storage.dart';
+import 'package:mml_app/util/rsa.dart';
 import 'package:mml_app/view_models/register.dart';
 
 /// Service that handles the client data of the server.
@@ -46,10 +46,7 @@ class ClientService {
   ClientService._([
     this._moveAdapter,
     Future<String> Function(String message, String privateKey)? sign,
-  ]) : _sign =
-           sign ??
-           ((message, privateKey) =>
-               RSA.signPKCS1v15(message, Hash.SHA512, privateKey));
+  ]) : _sign = sign ?? Rsa.sign;
 
   /// Creates a service, that sends the requests of [moveServer] and of
   /// [isClientRegistered] without error handling with the [adapter] and signs
@@ -338,12 +335,12 @@ class ClientService {
       }
     } catch (e) {
       // Rethrow the error on login page, to abort the register process
-      // correctly or on not authorized errors to prevent logout on server
-      // errors.
-      if (!(await _storage.has(SecureStorageService.accessTokenStorageKey)) ||
-          (e is DioException &&
-              (e.response?.statusCode != HttpStatus.unauthorized &&
-                  e.response?.data['error'] != 'Error occurred 333'))) {
+      // correctly, on local errors like unreadable credentials or on server
+      // errors, so the registration is only removed if the server rejects it.
+      if (e is! DioException ||
+          !(await _storage.has(SecureStorageService.accessTokenStorageKey)) ||
+          (e.response?.statusCode != HttpStatus.unauthorized &&
+              e.response?.data['error'] != 'Error occurred 333')) {
         rethrow;
       }
 
